@@ -5,6 +5,7 @@ import LoginPage from "./pages/commonPages/login";
 import RegisterPage from "./pages/commonPages/register";
 import HomePage from "./pages/commonPages/home";
 import VehicleRegistrationForm from "./pages/userPages/busOwners/vehicleRegister";
+import ViewPassengers from './pages/userPages/busOwners/viewPassengers';
 
 function App() {
   return (
@@ -18,6 +19,8 @@ function App() {
             path="/registervehicle"
             element={<VehicleRegistrationForm />}
           />
+          <Route path="/viewpassengers" element={<ViewPassengers />} />
+
         </Routes>
       </BrowserRouter>
     </div>
