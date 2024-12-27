@@ -2,6 +2,7 @@
 
 import React from "react";
 import { Form, Input, Button, Select } from "antd";
+import { registerVehicle } from "../../../apis/busOwner.api";
 
 const { Option } = Select;
 
@@ -9,6 +10,7 @@ const VehicleRegistrationForm = () => {
   const [form] = Form.useForm();
 
   const onFinish = (values) => {
+    registerVehicle(values);
     console.log("Form Submitted:", values);
   };
 

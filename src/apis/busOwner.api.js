@@ -1,41 +1,41 @@
-import axios from 'axios';
+import axios from "axios";
 
-export const getOwnedBuses = async () => {
+export const getOwnedVehicles = async () => {
   try {
-    const response = await axios.get('/api/bus-owner/owned-buses');
+    const response = await axios.get("/api/bus-owner/owned-buses");
     return response.data;
   } catch (error) {
-    console.error('Error fetching owned buses:', error);
+    console.error("Error fetching owned buses:", error);
     return error;
   }
 };
 
-export const registerBus = async (busData) => {
+export const registerVehicle = async (busData) => {
   try {
-    const response = await axios.post('/api/bus-owner/register-bus', busData);
+    const response = await axios.post("/api/bus-owner/register-bus", busData);
     return response.data;
   } catch (error) {
-    console.error('Error registering bus:', error);
+    console.error("Error registering bus:", error);
     return error;
   }
 };
 
 export const updateBus = async (busData) => {
   try {
-    const response = await axios.put('/api/bus-owner/update-bus', busData);
+    const response = await axios.put("/api/bus-owner/update-bus", busData);
     return response.data;
   } catch (error) {
-    console.error('Error updating bus:', error);
+    console.error("Error updating bus:", error);
     return error;
   }
 };
 
-export const getPassengers = async (busId) => {
+export const getVehiclePassengers = async (busId) => {
   try {
-    const response = await axios.get(`/api/bus-owner/passengers/${busId}`);
+    const response = await axios.get(`/api/bus-owner/${busId}/passengers`);
     return response.data;
   } catch (error) {
-    console.error('Error fetching passengers:', error);
+    console.error("Error fetching passengers:", error);
     return error;
   }
 };
@@ -47,7 +47,7 @@ export const removePassenger = async (passengerId, busId) => {
     );
     return response.data;
   } catch (error) {
-    console.error('Error removing passenger:', error);
+    console.error("Error removing passenger:", error);
     return error;
   }
 };
@@ -60,7 +60,7 @@ export const updatePassenger = async (passengerData, busId) => {
     );
     return response.data;
   } catch (error) {
-    console.error('Error updating passenger:', error);
+    console.error("Error updating passenger:", error);
     return error;
   }
 };
