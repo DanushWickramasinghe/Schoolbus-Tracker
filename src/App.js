@@ -5,7 +5,8 @@ import LoginPage from "./pages/commonPages/login";
 import RegisterPage from "./pages/commonPages/register";
 import HomePage from "./pages/commonPages/home";
 import VehicleRegistrationForm from "./pages/userPages/busOwners/vehicleRegister";
-import ViewPassengers from './pages/userPages/busOwners/viewPassengers';
+import ViewPassengers from "./pages/userPages/busOwners/viewPassengers";
+import ViewVehicles from "./pages/userPages/passengers/viewVehicles";
 
 function App() {
   return (
@@ -20,7 +21,7 @@ function App() {
             element={<VehicleRegistrationForm />}
           />
           <Route path="/viewpassengers" element={<ViewPassengers />} />
-
+          <Route path="/viewvehicles" element={<ViewVehicles />} />
         </Routes>
       </BrowserRouter>
     </div>

@@ -19,7 +19,7 @@ const ViewPassengers = () => {
     }
   }, []);
 
-  const getVehiclePassengers = async (busId) => {
+  const getPassengers = async (busId) => {
     try {
       const passengers = await getPassengers(busId);
       console.log(passengers);
