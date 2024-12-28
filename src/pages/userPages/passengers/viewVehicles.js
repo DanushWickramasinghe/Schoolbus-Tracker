@@ -44,6 +44,7 @@ const ViewVehicles = () => {
       render: (_, record) => (
         <Space size="middle">
           <a>Subscribe {record.name}</a>
+          <a>View more details</a>
         </Space>
       ),
     },
