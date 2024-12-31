@@ -3,8 +3,7 @@
 
 import React, { useState, useEffect } from "react";
 import { getOwnedVehicles, getPassengers } from "../../../apis/busOwner.api";
-import { DownOutlined } from "@ant-design/icons";
-import { Badge, Dropdown, Space, Table } from "antd";
+import { Space, Table } from "antd";
 
 const ViewPassengers = () => {
   const [vehicles, setVehicles] = useState([]);
