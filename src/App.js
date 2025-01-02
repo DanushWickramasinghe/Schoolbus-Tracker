@@ -8,6 +8,8 @@ import VehicleRegistrationForm from "./pages/userPages/busOwners/vehicleRegister
 import ViewPassengers from "./pages/userPages/busOwners/viewPassengers";
 import ViewVehicles from "./pages/userPages/passengers/viewVehicles";
 import ManageUsers from "./pages/adminPages/manageUsers";
+import Dashboard from "./pages/adminPages/dashboard";
+import PassengerProfile from "./pages/userPages/passengers/viewPassengerProfile";
 
 function App() {
   return (
@@ -24,6 +26,8 @@ function App() {
           <Route path="/viewpassengers" element={<ViewPassengers />} />
           <Route path="/viewvehicles" element={<ViewVehicles />} />
           <Route path="/manageusers" element={<ManageUsers />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/passengerprofile" element={<PassengerProfile />} />
         </Routes>
       </BrowserRouter>
     </div>
