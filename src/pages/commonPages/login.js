@@ -6,7 +6,7 @@ const LoginPage = () => {
   const [loading, setLoading] = useState(false);
 
   const onFinish = (values) => {
-    console.log("Success:", values);
+    console.log(values);
     setLoading(true);
     login(values)
       .then((data) => {

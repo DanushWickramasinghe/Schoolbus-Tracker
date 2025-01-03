@@ -1,4 +1,5 @@
 import axios from "axios";
+import Host from "../configs/server";
 
 export const getOwnedVehicles = async () => {
   try {
@@ -12,7 +13,10 @@ export const getOwnedVehicles = async () => {
 
 export const registerVehicle = async (busData) => {
   try {
-    const response = await axios.post("/api/bus-owner/register-bus", busData);
+    const response = await axios.post(
+      `${Host}/api/user/bus-owner/register-bus`,
+      busData
+    );
     return response.data;
   } catch (error) {
     console.error("Error registering bus:", error);

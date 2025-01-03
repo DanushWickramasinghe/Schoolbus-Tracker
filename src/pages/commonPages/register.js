@@ -6,7 +6,7 @@ const RegisterPage = () => {
   const [loading, setLoading] = useState(false);
 
   const onFinish = (values) => {
-    console.log("Success:", values);
+    console.log(values);
     setLoading(true);
     register(values)
       .then((data) => {

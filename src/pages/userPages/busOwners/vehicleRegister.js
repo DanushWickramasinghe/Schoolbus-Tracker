@@ -1,6 +1,6 @@
 /* Bus owners can register their vehicles here, by filling a form. */
 
-import React from "react";
+import React, { useState } from "react";
 import { Form, Input, Button, Select } from "antd";
 import { registerVehicle } from "../../../apis/busOwner.api";
 
@@ -8,10 +8,20 @@ const { Option } = Select;
 
 const VehicleRegistrationForm = () => {
   const [form] = Form.useForm();
+  const [loading, setLoading] = useState(false);
 
   const onFinish = (values) => {
-    registerVehicle(values);
-    console.log("Form Submitted:", values);
+    console.log(values);
+    setLoading(true);
+    registerVehicle(values)
+      .then((data) => {
+        console.log(data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error logging in:", error);
+        setLoading(false);
+      });
   };
 
   const onFinishFailed = (errorInfo) => {
