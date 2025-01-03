@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Card, Form, Input, Button } from "antd";
+import { register } from "../../apis/auth.api";
 
 const RegisterPage = () => {
   const [loading, setLoading] = useState(false);
@@ -7,6 +8,15 @@ const RegisterPage = () => {
   const onFinish = (values) => {
     console.log("Success:", values);
     setLoading(true);
+    register(values)
+      .then((data) => {
+        console.log(data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error logging in:", error);
+        setLoading(false);
+      });
     // Add register logic here
   };
 
