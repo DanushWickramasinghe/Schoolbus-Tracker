@@ -1,9 +1,12 @@
 import axios from "axios";
+import Host from "../configs/server";
 
 export const viewVehicleDetails = async () => {
   try {
-    const response = await axios.get("/api/vehicle-details");
-    return response.data;
+    const response = await axios.get(
+      `${Host}/api/user/passenger/vehicle-details`
+    );
+    return response.data.registeredvehicles;
   } catch (error) {
     console.error("Error fetching owned buses:", error);
     return error;
@@ -22,7 +25,7 @@ export const viewMoreVehicleDetails = async (busID) => {
 };
 
 // This API is defined to handle the subscribe action. This subscribe action should notify the busowner about this new passenger.
-export const handleSubscribe = async () => {
+export const handleSubscribe = async (vehicleId, passengerId) => {
   try {
     const response = await axios.post("/api/subscribe", {
       vehicleId,

@@ -19,6 +19,7 @@ const Dashboard = () => {
       console.error("Error fetching Dashboard data:", error);
     }
   }, [setData]);
+  
 
   return (
     <div className="dashboard">
