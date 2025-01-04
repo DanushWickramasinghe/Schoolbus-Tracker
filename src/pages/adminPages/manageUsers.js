@@ -1,7 +1,7 @@
 /* Admin access to manage any user, who uses the application */
 
 import React, { useState } from "react";
-import { Card, Space, Table } from "antd";
+import { Card, Space, Table, Button } from "antd";
 
 const ManageUsers = () => {
   const tabList = [
@@ -37,8 +37,12 @@ const ManageUsers = () => {
       key: "action",
       render: (_, record) => (
         <Space size="middle">
-          <a>Remove user</a>
-          <a>Edit user</a>
+          <Button type="primary" size="small">
+            Remove user
+          </Button>
+          <Button type="primary" size="small">
+            Edit user
+          </Button>
         </Space>
       ),
     },
@@ -66,8 +70,12 @@ const ManageUsers = () => {
       key: "action",
       render: (_, record) => (
         <Space size="middle">
-          <a>Remove user</a>
-          <a>Edit user</a>
+          <Button type="primary" size="small">
+            Remove user
+          </Button>
+          <Button type="primary" size="small">
+            Edit user
+          </Button>
         </Space>
       ),
     },
@@ -122,19 +130,18 @@ const ManageUsers = () => {
     ),
   };
 
-  const [activeTabKey1, setActiveTabKey1] = useState("tab1");
+  const [activeTabKey1, setActiveTabKey1] = useState("BusOwners");
   const onTab1Change = (key) => {
     setActiveTabKey1(key);
   };
 
   return (
     <>
+      <h2 style={{ textAlign: "center", marginTop: "20px" }}>Manage users</h2>
       <Card
         style={{
           width: "100%",
         }}
-        title="Manage users"
-        extra={<a href="#">More</a>}
         tabList={tabList}
         activeTabKey={activeTabKey1}
         onTabChange={onTab1Change}
