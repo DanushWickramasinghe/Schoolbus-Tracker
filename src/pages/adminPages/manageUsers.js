@@ -1,160 +1,149 @@
-/* Bus owners can view passengers registered for each of their vehicles here.*/
-/* Functions related to removing current passengers, accepting new passengers */
+/* Admin access to manage any user, who uses the application */
 
-import React, { useState, useEffect } from "react";
-// import { getOwnedVehicles, getPassengers } from "../../../apis/busOwner.api";
-import { DownOutlined } from "@ant-design/icons";
-import { Badge, Dropdown, Space, Table } from "antd";
+import React, { useState } from "react";
+import { Card, Space, Table } from "antd";
 
 const ManageUsers = () => {
-  const [vehicles, setVehicles] = useState([]);
+  const tabList = [
+    {
+      key: "BusOwners",
+      tab: "Bus Owners",
+    },
+    {
+      key: "Passengers",
+      tab: "Passengers",
+    },
+  ];
 
-  useEffect(() => {
-    // try {
-    //   getOwnedVehicles().then((data) => {
-    //     setVehicles(data);
-    //   });
-    // } catch (error) {
-    //   console.error("Error fetching owned vehicles:", error);
-    // }
-  }, []);
+  const columnsBusOwners = [
+    {
+      title: "Registration ID",
+      dataIndex: "registrationid",
+      key: "registrationid",
+      render: (text) => <a>{text}</a>,
+    },
+    {
+      title: "Full Name",
+      dataIndex: "fullname",
+      key: "fullname",
+    },
+    {
+      title: "NIC number",
+      dataIndex: "nicnumber",
+      key: "nicnumber",
+    },
+    {
+      title: "Action",
+      key: "action",
+      render: (_, record) => (
+        <Space size="middle">
+          <a>Remove user</a>
+          <a>Edit user</a>
+        </Space>
+      ),
+    },
+  ];
 
-  const getPassengers = async (busId) => {
-    // try {
-    //   const passengers = await getPassengers(busId);
-    //   console.log(passengers);
-    // } catch (error) {
-    //   console.error("Error fetching passengers:", error);
-    // }
-  };
+  const columnsPassengers = [
+    {
+      title: "Registration ID",
+      dataIndex: "registrationid",
+      key: "registrationid",
+      render: (text) => <a>{text}</a>,
+    },
+    {
+      title: "Full Name",
+      dataIndex: "fullname",
+      key: "fullname",
+    },
+    {
+      title: "NIC number",
+      dataIndex: "nicnumber",
+      key: "nicnumber",
+    },
+    {
+      title: "Action",
+      key: "action",
+      render: (_, record) => (
+        <Space size="middle">
+          <a>Remove user</a>
+          <a>Edit user</a>
+        </Space>
+      ),
+    },
+  ];
 
-  const items = [
+  const dataBusOwners = [
     {
       key: "1",
-      label: "Action 1",
+      registrationid: "REG12345",
+      fullname: "John Brown",
+      nicnumber: "123456789V",
     },
     {
       key: "2",
-      label: "Action 2",
+      registrationid: "REG67890",
+      fullname: "Jane Smith",
+      nicnumber: "987654321V",
+    },
+    {
+      key: "3",
+      registrationid: "REG11223",
+      fullname: "Sam Wilson",
+      nicnumber: "456789123V",
     },
   ];
 
-  const expandDataSource = Array.from({
-    length: 3,
-  }).map((_, i) => ({
-    key: i.toString(),
-    date: "2014-12-24 23:12:00",
-    name: "This is production name",
-    upgradeNum: "Upgraded: 56",
-  }));
-
-  const dataSource = Array.from({
-    length: 3,
-  }).map((_, i) => ({
-    key: i.toString(),
-    name: "Screen",
-    platform: "iOS",
-    version: "10.3.4.5654",
-    upgradeNum: 500,
-    creator: "Jack",
-    createdAt: "2014-12-24 23:12:00",
-  }));
-
-  const expandColumns = [
+  const dataPassengers = [
     {
-      title: "Passenger ID",
-      dataIndex: "passengerID",
-      key: "passengerID",
+      key: "1",
+      registrationid: "REG98765",
+      fullname: "Alice Johnson",
+      nicnumber: "234567890V",
     },
     {
-      title: "Passenger Name",
-      dataIndex: "passengerName",
-      key: "passengername",
+      key: "2",
+      registrationid: "REG54321",
+      fullname: "Bob Williams",
+      nicnumber: "876543210V",
     },
     {
-      title: "Registration Date",
-      dataIndex: "registrationDate",
-      key: "registrationDate",
-    },
-    {
-      title: "Pickup location",
-      dataIndex: "pickup",
-      key: "pickup",
-    },
-    {
-      title: "Destination",
-      dataIndex: "destination",
-      key: "destination",
-    },
-    {
-      title: "Action",
-      key: "operation",
-      render: () => (
-        <Space size="middle">
-          <a>Edit details</a>
-          <a>Remove passenger</a>
-        </Space>
-      ),
+      key: "3",
+      registrationid: "REG67891",
+      fullname: "Charlie Brown",
+      nicnumber: "567890123V",
     },
   ];
 
-  const columns = [
-    {
-      title: "Vehicle Number",
-      dataIndex: "vehicleNumber",
-      key: "vehicleNumber",
-    },
-    {
-      title: "Vehicle Owner",
-      dataIndex: "vehicleOwner",
-      key: "vehicleOwner",
-    },
-    {
-      title: "Owner NIC",
-      dataIndex: "ownerNIC",
-      key: "ownerNIC",
-    },
-    {
-      title: "Vehicle Type",
-      dataIndex: "vehicleType",
-      key: "vehicleType",
-    },
-    {
-      title: "Vehicle Model",
-      dataIndex: "vehicleModel",
-      key: "vehicleModel",
-    },
-    {
-      title: "Action",
-      key: "operation",
-      render: () => (
-        <Space size="middle">
-          <a>Edit details</a>
-          <a>Remove vehicle</a>
-        </Space>
-      ),
-    },
-  ];
+  const contentList = {
+    BusOwners: <Table columns={columnsBusOwners} dataSource={dataBusOwners} />,
+    Passengers: (
+      <Table columns={columnsPassengers} dataSource={dataPassengers} />
+    ),
+  };
 
-  const expandedRowRender = () => (
-    <Table
-      columns={expandColumns}
-      dataSource={expandDataSource}
-      pagination={false}
-    />
-  );
+  const [activeTabKey1, setActiveTabKey1] = useState("tab1");
+  const onTab1Change = (key) => {
+    setActiveTabKey1(key);
+  };
 
   return (
-    <div className="viewVehicles">
-      <Table
-        columns={columns}
-        expandable={{
-          expandedRowRender,
-          defaultExpandedRowKeys: ["0"],
+    <>
+      <Card
+        style={{
+          width: "100%",
         }}
-        dataSource={dataSource}
-      />
-    </div>
+        title="Manage users"
+        extra={<a href="#">More</a>}
+        tabList={tabList}
+        activeTabKey={activeTabKey1}
+        onTabChange={onTab1Change}
+      >
+        {contentList[activeTabKey1]}
+      </Card>
+      <br />
+      <br />
+    </>
   );
 };
 

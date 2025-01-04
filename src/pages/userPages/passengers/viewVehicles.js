@@ -72,9 +72,9 @@ const ViewVehicles = () => {
 
   return (
     <div>
-      <h1 style={{ textAlign: "center", marginTop: "20px" }}>
+      <h2 style={{ textAlign: "center", marginTop: "20px" }}>
         Available Vehicles
-      </h1>
+      </h2>
       {error ? (
         <p style={{ textAlign: "center", color: "red" }}>{error}</p>
       ) : (
