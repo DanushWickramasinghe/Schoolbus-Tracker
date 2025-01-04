@@ -1,11 +1,27 @@
-/*Here a registered passenger can view vehicles in the system, and subscribe the 
-relevant bus. ( Which then sends a request to bus owner ) 
-Can view details of each bus */
-
-import React from "react";
-import { Space, Table, Tag } from "antd";
+import React, { useState, useEffect } from "react";
+import { Space, Table, Button } from "antd";
+import { viewVehicleDetails } from "../../../apis/passenger.api";
 
 const ViewVehicles = () => {
+  const [data, setData] = useState([]);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    viewVehicleDetails()
+      .then((data) => {
+        console.log("API Response", data);
+        const formattedData = data.map((item, index) => ({
+          ...item,
+          key: index,
+        }));
+        setData(formattedData);
+      })
+      .catch((error) => {
+        console.error("Error fetching vehicle data:", error);
+        setError("Failed to load vehicle data. Please try again later.");
+      });
+  }, []);
+
   const columns = [
     {
       title: "Vehicle ID",
@@ -14,9 +30,9 @@ const ViewVehicles = () => {
       render: (text) => <a>{text}</a>,
     },
     {
-      title: "Vehicle Number",
-      dataIndex: "vehiclenumber",
-      key: "vehiclenumber",
+      title: "Owner Name",
+      dataIndex: "ownername",
+      key: "ownername",
     },
     {
       title: "Vehicle Type",
@@ -24,17 +40,17 @@ const ViewVehicles = () => {
       key: "vehicletype",
     },
     {
-      title: "Owner Name",
-      dataIndex: "ownername",
-      key: "ownername",
+      title: "Vehicle Number",
+      dataIndex: "vehiclenumber",
+      key: "vehiclenumber",
     },
     {
-      title: "Starting location",
+      title: "Starting Location",
       dataIndex: "startinglocation",
       key: "startinglocation",
     },
     {
-      title: "End location",
+      title: "End Location",
       dataIndex: "endlocation",
       key: "endlocation",
     },
@@ -43,39 +59,27 @@ const ViewVehicles = () => {
       key: "action",
       render: (_, record) => (
         <Space size="middle">
-          <a>Subscribe {record.name}</a>
-          <a>View more details</a>
+          <Button type="primary" size="small">
+            Subscribe
+          </Button>
+          <Button type="primary" size="small">
+            View details
+          </Button>
         </Space>
       ),
     },
   ];
 
-  const data = [
-    {
-      key: "1",
-      vehicleid: "12345",
-      vehiclenumber: "AB-1234",
-      vehicletype: "van",
-      ownername: "John Doe",
-      startinglocation: "City A",
-      endlocation: "City B",
-    },
-    {
-      key: "2",
-      vehicleid: "67890",
-      vehiclenumber: "CD-5678",
-      vehicletype: "bus - 54 seater",
-      ownername: "Jane Smith",
-      startinglocation: "City X",
-      endlocation: "City Y",
-    },
-  ];
   return (
     <div>
-      <h1 style={{ textAlign: "center", marginTop: "20px" }}>
+      <h2 style={{ textAlign: "center", marginTop: "20px" }}>
         Available Vehicles
-      </h1>
-      <Table columns={columns} dataSource={data} />
+      </h2>
+      {error ? (
+        <p style={{ textAlign: "center", color: "red" }}>{error}</p>
+      ) : (
+        <Table columns={columns} dataSource={data} />
+      )}
     </div>
   );
 };
