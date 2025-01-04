@@ -1,9 +1,44 @@
 /* Admin access to manage any user, who uses the application */
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Card, Space, Table, Button } from "antd";
+import { getBusOwnerData, getPassengerData } from "../../apis/admin.api";
 
 const ManageUsers = () => {
+  const [busOwnerData, setBusOwnerData] = useState([]);
+  const [passengerData, setPassengerData] = useState([]);
+  const [activeTabKey1, setActiveTabKey1] = useState("BusOwners");
+
+  useEffect(() => {
+    try {
+      getBusOwnerData().then((data) => {
+        console.log("API Response for bus owner data:", data);
+        const formattedData = data.map((item, index) => ({
+          ...item,
+          key: index,
+        }));
+        setBusOwnerData(formattedData);
+      });
+    } catch (error) {
+      console.log("Error fetching bus owner data:", error);
+    }
+  }, [activeTabKey1]);
+
+  useEffect(() => {
+    try {
+      getPassengerData().then((data) => {
+        console.log("API Response for passenger data:", data);
+        const formattedData = data.map((item, index) => ({
+          ...item,
+          key: index,
+        }));
+        setPassengerData(formattedData);
+      });
+    } catch (error) {
+      console.log("Error fetching passenger data:", error);
+    }
+  }, [activeTabKey1]);
+
   const tabList = [
     {
       key: "BusOwners",
@@ -81,56 +116,13 @@ const ManageUsers = () => {
     },
   ];
 
-  const dataBusOwners = [
-    {
-      key: "1",
-      registrationid: "REG12345",
-      fullname: "John Brown",
-      nicnumber: "123456789V",
-    },
-    {
-      key: "2",
-      registrationid: "REG67890",
-      fullname: "Jane Smith",
-      nicnumber: "987654321V",
-    },
-    {
-      key: "3",
-      registrationid: "REG11223",
-      fullname: "Sam Wilson",
-      nicnumber: "456789123V",
-    },
-  ];
-
-  const dataPassengers = [
-    {
-      key: "1",
-      registrationid: "REG98765",
-      fullname: "Alice Johnson",
-      nicnumber: "234567890V",
-    },
-    {
-      key: "2",
-      registrationid: "REG54321",
-      fullname: "Bob Williams",
-      nicnumber: "876543210V",
-    },
-    {
-      key: "3",
-      registrationid: "REG67891",
-      fullname: "Charlie Brown",
-      nicnumber: "567890123V",
-    },
-  ];
-
   const contentList = {
-    BusOwners: <Table columns={columnsBusOwners} dataSource={dataBusOwners} />,
+    BusOwners: <Table columns={columnsBusOwners} dataSource={busOwnerData} />,
     Passengers: (
-      <Table columns={columnsPassengers} dataSource={dataPassengers} />
+      <Table columns={columnsPassengers} dataSource={passengerData} />
     ),
   };
 
-  const [activeTabKey1, setActiveTabKey1] = useState("BusOwners");
   const onTab1Change = (key) => {
     setActiveTabKey1(key);
   };
