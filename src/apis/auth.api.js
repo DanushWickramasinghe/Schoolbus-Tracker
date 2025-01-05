@@ -3,13 +3,11 @@ import Host from "../configs/server";
 
 export const login = async (userData) => {
   try {
-    console.log("==========>");
-    console.log(userData);
     const response = await axios.post(`${Host}/api/auth/login`, userData);
     return response.data;
   } catch (error) {
-    console.error("Error logging in:", error);
-    return error;
+    console.error(error.response.data.message);
+    return error.response.data.message;
   }
 };
 
