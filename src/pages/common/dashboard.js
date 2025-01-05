@@ -14,10 +14,12 @@ import { Button, Menu } from 'antd';
 
 const General = React.lazy(() => import('../admin/general'));
 const VehicleRegistrationForm = React.lazy(() => import('../user/busOwners/vehicleRegister'));
+const ViewPassengers = React.lazy(() => import('../user/busOwners/viewPassengers'));
 
 const componentsMap = {
   1: <General />,
   2: <VehicleRegistrationForm />,
+  3: <ViewPassengers />,
 };
 
 const horizontalItems = [
@@ -188,6 +190,7 @@ const DashBoard = () => {
         flexDirection: 'column',
         width: '100vw',
         height: '100vh',
+        overflow: 'hidden',
       }}
     >
       <div
@@ -245,7 +248,7 @@ const DashBoard = () => {
             maxWidth: collapsed ? 80 : 256,
           }}
         />
-        <div style={{ flexGrow: 1, padding: 16 }}>
+        <div style={{ flexGrow: 1, padding: 16, overflow: 'auto' }}>
           <Suspense fallback={<div>Loading...</div>}>
             {componentsMap[verticalSelected] || (
               <p>Please select a valid option.</p>
