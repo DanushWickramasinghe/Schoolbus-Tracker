@@ -9,6 +9,7 @@ const ManageUsers = () => {
   const [passengerData, setPassengerData] = useState([]);
   const [activeTabKey1, setActiveTabKey1] = useState("BusOwners");
 
+  // Should register users as bus owners or passengers to implement this hook.
   useEffect(() => {
     try {
       getBusOwnerData().then((data) => {
@@ -24,6 +25,7 @@ const ManageUsers = () => {
     }
   }, [activeTabKey1]);
 
+  // Should register users as bus owners or passengers to implement this hook.
   useEffect(() => {
     try {
       getPassengerData().then((data) => {

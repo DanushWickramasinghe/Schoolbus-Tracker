@@ -149,7 +149,7 @@ const ViewPassengers = () => {
         columns={columns}
         expandable={{
           expandedRowRender,
-          defaultExpandedRowKeys: ["0"],
+          defaultExpandedRowKeys: [],
         }}
         dataSource={dataSource}
       />

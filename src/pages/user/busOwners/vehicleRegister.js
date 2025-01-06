@@ -40,7 +40,7 @@ const VehicleRegistrationForm = () => {
       >
         <Form.Item
           label="Name of the owner"
-          name="ownerName"
+          name="owner_name"
           rules={[{ required: true, message: "Please enter the owner's name" }]}
         >
           <Input placeholder="Enter owner's full name" />
@@ -48,7 +48,7 @@ const VehicleRegistrationForm = () => {
 
         <Form.Item
           label="NIC Number of the owner"
-          name="NICnumber"
+          name="owner_NIC_number"
           rules={[{ required: true, message: "Please enter the NIC number" }]}
         >
           <Input placeholder="Enter NIC number" />
@@ -56,7 +56,7 @@ const VehicleRegistrationForm = () => {
 
         <Form.Item
           label="Type of Vehicle"
-          name="vehicleType"
+          name="vehicle_type"
           rules={[
             { required: true, message: "Please select the vehicle type" },
           ]}
@@ -70,7 +70,7 @@ const VehicleRegistrationForm = () => {
 
         <Form.Item
           label="Vehicle Model"
-          name="vehicleModel"
+          name="vehicle_model"
           rules={[
             { required: true, message: "Please enter the vehicle model" },
           ]}
@@ -80,12 +80,42 @@ const VehicleRegistrationForm = () => {
 
         <Form.Item
           label="Vehicle Number"
-          name="vehicleNumber"
+          name="vehicle_number"
           rules={[
             { required: true, message: "Please enter the vehicle number" },
           ]}
         >
           <Input placeholder="Enter vehicle number" />
+        </Form.Item>
+
+        <Form.Item
+          label="Starting Location"
+          name="starting_location"
+          rules={[
+            { required: true, message: "Please enter the Starting location" },
+          ]}
+        >
+          <Input placeholder="Enter start location" />
+        </Form.Item>
+
+        <Form.Item
+          label="End Location"
+          name="end_location"
+          rules={[
+            { required: true, message: "Please enter the ending location" },
+          ]}
+        >
+          <Input placeholder="Enter end location" />
+        </Form.Item>
+
+        <Form.Item
+          label="Covered Cities"
+          name="covered_cities"
+          rules={[
+            { required: true, message: "Please enter all the covered cities" },
+          ]}
+        >
+          <Input placeholder="Enter covered cities" />
         </Form.Item>
 
         <Form.Item>
