@@ -1,4 +1,5 @@
 import React, { Suspense, useState } from 'react';
+import { Navigate, useNavigate } from 'react-router-dom';
 import {
   AppstoreOutlined,
   MailOutlined,
@@ -9,12 +10,19 @@ import {
   CarOutlined,
   UserOutlined,
   UserSwitchOutlined,
+  LogoutOutlined,
 } from '@ant-design/icons';
-import { Button, Menu } from 'antd';
+import { Button, Menu, message } from 'antd';
+
+import { logout } from '../../apis/auth.api';
 
 const General = React.lazy(() => import('../admin/general'));
-const VehicleRegistrationForm = React.lazy(() => import('../user/busOwners/vehicleRegister'));
-const ViewPassengers = React.lazy(() => import('../user/busOwners/viewPassengers'));
+const VehicleRegistrationForm = React.lazy(() =>
+  import('../user/busOwners/vehicleRegister')
+);
+const ViewPassengers = React.lazy(() =>
+  import('../user/busOwners/viewPassengers')
+);
 
 const componentsMap = {
   1: <General />,
@@ -69,13 +77,18 @@ const horizontalItems = [
       },
     ],
   },
+  // {
+  //   key: 'alipay',
+  //   label: (
+  //     <a href='https://ant.design' target='_blank' rel='noopener noreferrer'>
+  //       Navigation Four - Link
+  //     </a>
+  //   ),
+  // },
   {
-    key: 'alipay',
-    label: (
-      <a href='https://ant.design' target='_blank' rel='noopener noreferrer'>
-        Navigation Four - Link
-      </a>
-    ),
+    label: 'Logout',
+    key: 'logout',
+    icon: <LogoutOutlined />,
   },
 ];
 
@@ -170,18 +183,35 @@ const items = [
 ];
 
 const DashBoard = () => {
+  const navigate = useNavigate();
   const [collapsed, setCollapsed] = useState(false);
+
   const toggleCollapsed = () => {
     setCollapsed(!collapsed);
   };
 
-  const [current, setCurrent] = useState('mail');
-  const onClick = (e) => {
-    console.log('click ', e);
-    setCurrent(e.key);
+  const [verticalSelected, setVerticalSelected] = useState('1');
+
+  const handlelogout = () => {
+    try {
+      logout();
+      message.success('Logged out successfully');
+      navigate('/login');
+    } catch (error) {
+      console.error('Error logging out:', error);
+      message.error('Error logging out');
+    }
   };
 
-  const [verticalSelected, setVerticalSelected] = useState('1');
+  const handleHorizontalClick = (key) => {
+    switch (key) {
+      case 'logout':
+        handlelogout();
+        break;
+      default:
+        break;
+    }
+  };
 
   return (
     <div
@@ -215,8 +245,7 @@ const DashBoard = () => {
           School Bus Tracker
         </h1>
         <Menu
-          onClick={onClick}
-          selectedKeys={[current]}
+          onClick={({ key }) => handleHorizontalClick(key)}
           mode='horizontal'
           items={horizontalItems}
           style={{

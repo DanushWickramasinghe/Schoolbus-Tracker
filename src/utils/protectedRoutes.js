@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Navigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
 import { getAccessTokenWithRefreshToken } from '../apis/auth.api';
 
@@ -23,7 +23,16 @@ const ProtectedRoute = ({ children, roles }) => {
         return <Navigate to='/login' />;
       }
 
-      getAccessTokenWithRefreshToken();
+      try {
+        const response = getAccessTokenWithRefreshToken();
+        if (!response.accessToken && !response.refreshToken) {
+          return <Navigate to='/login' />;
+        }
+      } catch (error) {
+        console.log('come here');
+        console.error('Error:', error);
+        return <Navigate to='/login' />;
+      }
 
       const newAccessToken = localStorage.getItem('accessToken');
       const newDecodedToken = jwtDecode(newAccessToken);
