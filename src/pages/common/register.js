@@ -23,7 +23,7 @@ const radioOptions = [
   },
 ];
 
-const RegisterPage = () => {
+const RegisterPage = ({ title }) => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
 
@@ -51,7 +51,7 @@ const RegisterPage = () => {
   return (
     <Card>
       <div style={{ maxWidth: 600, margin: "0 auto", padding: "50px" }}>
-        <h2 style={{ textAlign: "center" }}>Vehicle Registration</h2>
+        <h2 style={{ textAlign: "center" }}>{title}</h2>
         <Form
           name="register"
           initialValues={{ remember: true }}

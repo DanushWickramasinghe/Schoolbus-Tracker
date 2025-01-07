@@ -15,6 +15,7 @@ import {
 import { Button, Menu, message } from "antd";
 
 import { logout } from "../../apis/auth.api";
+import ManageUsers from "../admin/manageUsers";
 
 const General = React.lazy(() => import("../admin/general"));
 const VehicleRegistrationForm = React.lazy(() =>
@@ -30,9 +31,10 @@ const componentsMap = {
   1: <General />,
   2: <VehicleRegistrationForm />,
   3: <ViewPassengers />,
-  4: <RegisterPage />,
+  4: <RegisterPage title="Passenger Registration" />,
   5: <ViewPassengers />,
-  8: <RegisterPage />,
+  8: <RegisterPage title="Driver Registration" />,
+  10: <ManageUsers />,
 };
 
 const horizontalItems = [
@@ -153,6 +155,10 @@ const items = [
       {
         key: "7",
         label: "View Admin",
+      },
+      {
+        key: "10",
+        label: "Manage users",
       },
     ],
   },
