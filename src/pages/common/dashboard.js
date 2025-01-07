@@ -1,5 +1,5 @@
-import React, { Suspense, useState } from 'react';
-import { Navigate, useNavigate } from 'react-router-dom';
+import React, { Suspense, useState } from "react";
+import { Navigate, useNavigate } from "react-router-dom";
 import {
   AppstoreOutlined,
   MailOutlined,
@@ -11,67 +11,72 @@ import {
   UserOutlined,
   UserSwitchOutlined,
   LogoutOutlined,
-} from '@ant-design/icons';
-import { Button, Menu, message } from 'antd';
+} from "@ant-design/icons";
+import { Button, Menu, message } from "antd";
 
-import { logout } from '../../apis/auth.api';
+import { logout } from "../../apis/auth.api";
 
-const General = React.lazy(() => import('../admin/general'));
+const General = React.lazy(() => import("../admin/general"));
 const VehicleRegistrationForm = React.lazy(() =>
-  import('../user/busOwners/vehicleRegister')
+  import("../user/busOwners/vehicleRegister")
 );
 const ViewPassengers = React.lazy(() =>
-  import('../user/busOwners/viewPassengers')
+  import("../user/busOwners/viewPassengers")
 );
+
+const RegisterPage = React.lazy(() => import("../common/register"));
 
 const componentsMap = {
   1: <General />,
   2: <VehicleRegistrationForm />,
   3: <ViewPassengers />,
+  4: <RegisterPage />,
+  5: <ViewPassengers />,
+  8: <RegisterPage />,
 };
 
 const horizontalItems = [
   {
-    label: 'Navigation One',
-    key: 'mail',
+    label: "Navigation One",
+    key: "mail",
     icon: <MailOutlined />,
   },
   {
-    label: 'Navigation Two',
-    key: 'app',
+    label: "Navigation Two",
+    key: "app",
     icon: <AppstoreOutlined />,
     disabled: true,
   },
   {
-    label: 'Navigation Three - Submenu',
-    key: 'SubMenu',
+    label: "Navigation Three - Submenu",
+    key: "SubMenu",
     icon: <SettingOutlined />,
     children: [
       {
-        type: 'group',
-        label: 'Item 1',
+        type: "group",
+        label: "Item 1",
         children: [
           {
-            label: 'Option 1',
-            key: 'setting:1',
+            label: "Option 1",
+            key: "setting:1",
           },
           {
-            label: 'Option 2',
-            key: 'setting:2',
+            label: "Option 2",
+            key: "setting:2",
           },
         ],
       },
       {
-        type: 'group',
-        label: 'Item 2',
+        type: "group",
+        label: "Item 2",
         children: [
           {
-            label: 'Option 3',
-            key: 'setting:3',
+            label: "Option 3",
+            key: "setting:3",
           },
           {
-            label: 'Option 4',
-            key: 'setting:4',
+            label: "Option 4",
+            key: "setting:4",
           },
         ],
       },
@@ -86,68 +91,68 @@ const horizontalItems = [
   //   ),
   // },
   {
-    label: 'Logout',
-    key: 'logout',
+    label: "Logout",
+    key: "logout",
     icon: <LogoutOutlined />,
   },
 ];
 
 const items = [
   {
-    key: '1',
+    key: "1",
     icon: <PieChartOutlined />,
-    label: 'General',
+    label: "General",
   },
   {
-    key: 'sub1',
+    key: "sub1",
     icon: <CarOutlined />,
-    label: 'Bus',
+    label: "Bus",
     children: [
       {
-        key: '8',
-        label: 'Register Driver',
+        key: "8",
+        label: "Register Driver",
       },
       {
-        key: '2',
-        label: 'Register Bus',
+        key: "2",
+        label: "Register Bus",
       },
       {
-        key: '9',
-        label: 'View Driver',
+        key: "9",
+        label: "View Driver",
       },
       {
-        key: '3',
-        label: 'View Bus',
+        key: "3",
+        label: "View Bus",
       },
     ],
   },
   {
-    key: 'sub2',
+    key: "sub2",
     icon: <UserOutlined />,
-    label: 'Passenger',
+    label: "Passenger",
     children: [
       {
-        key: '4',
-        label: 'Register Passenger',
+        key: "4",
+        label: "Register Passenger",
       },
       {
-        key: '5',
-        label: 'View Passenger',
+        key: "5",
+        label: "View Passenger",
       },
     ],
   },
   {
-    key: 'sub3',
-    label: 'Admin',
+    key: "sub3",
+    label: "Admin",
     icon: <UserSwitchOutlined />,
     children: [
       {
-        key: '6',
-        label: 'Register Admin',
+        key: "6",
+        label: "Register Admin",
       },
       {
-        key: '7',
-        label: 'View Admin',
+        key: "7",
+        label: "View Admin",
       },
     ],
   },
@@ -190,22 +195,22 @@ const DashBoard = () => {
     setCollapsed(!collapsed);
   };
 
-  const [verticalSelected, setVerticalSelected] = useState('1');
+  const [verticalSelected, setVerticalSelected] = useState("1");
 
   const handlelogout = () => {
     try {
       logout();
-      message.success('Logged out successfully');
-      navigate('/login');
+      message.success("Logged out successfully");
+      navigate("/login");
     } catch (error) {
-      console.error('Error logging out:', error);
-      message.error('Error logging out');
+      console.error("Error logging out:", error);
+      message.error("Error logging out");
     }
   };
 
   const handleHorizontalClick = (key) => {
     switch (key) {
-      case 'logout':
+      case "logout":
         handlelogout();
         break;
       default:
@@ -216,23 +221,23 @@ const DashBoard = () => {
   return (
     <div
       style={{
-        display: 'flex',
-        flexDirection: 'column',
-        width: '100vw',
-        height: '100vh',
-        overflow: 'hidden',
+        display: "flex",
+        flexDirection: "column",
+        width: "100vw",
+        height: "100vh",
+        overflow: "hidden",
       }}
     >
       <div
         style={{
-          display: 'flex',
-          width: '100vw',
-          justifyContent: 'space-between',
-          borderBottom: '1px solid #f0f0f0',
+          display: "flex",
+          width: "100vw",
+          justifyContent: "space-between",
+          borderBottom: "1px solid #f0f0f0",
         }}
       >
         <Button
-          type='primary'
+          type="primary"
           onClick={toggleCollapsed}
           style={{
             margin: 8,
@@ -246,28 +251,28 @@ const DashBoard = () => {
         </h1>
         <Menu
           onClick={({ key }) => handleHorizontalClick(key)}
-          mode='horizontal'
+          mode="horizontal"
           items={horizontalItems}
           style={{
-            display: 'flex',
+            display: "flex",
             flexGrow: 1,
-            justifyContent: 'flex-end',
+            justifyContent: "flex-end",
           }}
         />
       </div>
       <div
         style={{
-          display: 'flex',
-          flexDirection: 'row',
-          height: '100%',
+          display: "flex",
+          flexDirection: "row",
+          height: "100%",
         }}
       >
         <Menu
-          defaultSelectedKeys={['1']}
-          defaultOpenKeys={['sub1']}
+          defaultSelectedKeys={["1"]}
+          defaultOpenKeys={["sub1"]}
           onClick={({ key }) => setVerticalSelected(key)}
-          mode='inline'
-          theme='dark'
+          mode="inline"
+          theme="dark"
           inlineCollapsed={collapsed}
           items={items}
           style={{
@@ -277,7 +282,7 @@ const DashBoard = () => {
             maxWidth: collapsed ? 70 : 256,
           }}
         />
-        <div style={{ flexGrow: 1, padding: 16, overflow: 'auto' }}>
+        <div style={{ flexGrow: 1, padding: 16, overflow: "auto" }}>
           <Suspense fallback={<div>Loading...</div>}>
             {componentsMap[verticalSelected] || (
               <p>Please select a valid option.</p>
