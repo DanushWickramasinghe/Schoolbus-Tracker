@@ -84,14 +84,6 @@ const horizontalItems = [
       },
     ],
   },
-  // {
-  //   key: 'alipay',
-  //   label: (
-  //     <a href='https://ant.design' target='_blank' rel='noopener noreferrer'>
-  //       Navigation Four - Link
-  //     </a>
-  //   ),
-  // },
   {
     label: "Logout",
     key: "logout",
@@ -162,35 +154,6 @@ const items = [
       },
     ],
   },
-  // {
-  //   key: 'sub2',
-  //   label: 'Navigation Two',
-  //   icon: <AppstoreOutlined />,
-  //   children: [
-  //     {
-  //       key: '9',
-  //       label: 'Option 9',
-  //     },
-  //     {
-  //       key: '10',
-  //       label: 'Option 10',
-  //     },
-  //     {
-  //       key: 'sub3',
-  //       label: 'Submenu',
-  //       children: [
-  //         {
-  //           key: '11',
-  //           label: 'Option 11',
-  //         },
-  //         {
-  //           key: '12',
-  //           label: 'Option 12',
-  //         },
-  //       ],
-  //     },
-  //   ],
-  // },
 ];
 
 const DashBoard = () => {
@@ -275,7 +238,7 @@ const DashBoard = () => {
       >
         <Menu
           defaultSelectedKeys={["1"]}
-          defaultOpenKeys={["sub1"]}
+          defaultOpenKeys={["1"]}
           onClick={({ key }) => setVerticalSelected(key)}
           mode="inline"
           theme="dark"
@@ -284,7 +247,6 @@ const DashBoard = () => {
           style={{
             flexGrow: 1, // Make Menu take up remaining space
             minHeight: 0, // Ensure it can shrink if needed
-            // width: collapsed ? 80 : 256,
             maxWidth: collapsed ? 70 : 256,
           }}
         />
