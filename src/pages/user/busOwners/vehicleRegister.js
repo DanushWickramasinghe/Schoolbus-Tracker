@@ -1,14 +1,61 @@
 /* Bus owners can register their vehicles here, by filling a form. */
 
-import React, { useState } from "react";
-import { Form, Input, Button, Select, message } from "antd";
+import React, { useState, useEffect } from "react";
+import { Form, Input, Button, Select, message, Dropdown } from "antd";
 import { registerVehicle } from "../../../apis/busOwner.api";
+import { DownOutlined, UserOutlined } from "@ant-design/icons";
+import { getBusOwnerData } from "../../../apis/admin.api";
 
 const { Option } = Select;
 
 const VehicleRegistrationForm = () => {
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    try {
+      getBusOwnerData().then((data) => {
+        setUsers(data);
+      });
+    } catch (error) {
+      console.error("Error fetching users:", error);
+    }
+  }, []);
+
+  const handleMenuClick = (e) => {
+    message.info("Click on menu item.");
+    console.log("click", e);
+  };
+  const items = [
+    {
+      label: "1st menu item",
+      key: "1",
+      icon: <UserOutlined />,
+    },
+    {
+      label: "2nd menu item",
+      key: "2",
+      icon: <UserOutlined />,
+    },
+    {
+      label: "3rd menu item",
+      key: "3",
+      icon: <UserOutlined />,
+      danger: true,
+    },
+    {
+      label: "4rd menu item",
+      key: "4",
+      icon: <UserOutlined />,
+      danger: true,
+      disabled: true,
+    },
+  ];
+  const menuProps = {
+    items,
+    onClick: handleMenuClick,
+  };
 
   const onFinish = (values) => {
     console.log(values);
@@ -46,7 +93,13 @@ const VehicleRegistrationForm = () => {
           name="owner_name"
           rules={[{ required: true, message: "Please enter the owner's name" }]}
         >
-          <Input placeholder="Enter owner's full name" />
+          <Dropdown.Button
+            menu={menuProps}
+            placement="bottom"
+            icon={<UserOutlined />}
+          >
+            Choose name of the vehicle owner
+          </Dropdown.Button>
         </Form.Item>
 
         <Form.Item
@@ -115,7 +168,10 @@ const VehicleRegistrationForm = () => {
           label="Covered Cities"
           name="covered_cities"
           rules={[
-            { required: true, message: "Please enter all the covered cities" },
+            {
+              required: true,
+              message: "Please enter all the covered cities",
+            },
           ]}
         >
           <Input placeholder="Enter covered cities" />

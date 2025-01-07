@@ -35,6 +35,7 @@ export const updateBus = async (busData) => {
   }
 };
 
+// To be implemented further.
 export const getVehiclePassengers = async (busId) => {
   try {
     const response = await axios.get(`/api/bus-owner/${busId}/passengers`);

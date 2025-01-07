@@ -19,6 +19,7 @@ const ViewPassengers = () => {
     }
   }, []);
 
+  // This should be implemented further.
   const getPassengers = async (busId) => {
     try {
       const passengers = await getVehiclePassengers(busId);
@@ -28,6 +29,7 @@ const ViewPassengers = () => {
     }
   };
 
+  // Should be replaced with actual data from the API
   const expandDataSource = Array.from({
     length: 3,
   }).map((_, i) => ({

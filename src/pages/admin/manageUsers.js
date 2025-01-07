@@ -5,41 +5,24 @@ import { Card, Space, Table, Button } from "antd";
 import { getBusOwnerData, getPassengerData } from "../../apis/admin.api";
 
 const ManageUsers = () => {
-  // const [busOwnerData, setBusOwnerData] = useState([]);
-  // const [passengerData, setPassengerData] = useState([]);
+  const [busOwnerData, setBusOwnerData] = useState([]);
+  const [passengerData, setPassengerData] = useState([]);
   const [activeTabKey1, setActiveTabKey1] = useState("BusOwners");
 
   // Should register users as bus owners or passengers to implement this hook.
-  // useEffect(() => {
-  //   try {
-  //     getBusOwnerData().then((data) => {
-  //       console.log("API Response for bus owner data:", data);
-  //       const formattedData = data.map((item, index) => ({
-  //         ...item,
-  //         key: index,
-  //       }));
-  //       setBusOwnerData(formattedData);
-  //     });
-  //   } catch (error) {
-  //     console.log("Error fetching bus owner data:", error);
-  //   }
-  // }, [activeTabKey1]);
-
-  // // Should register users as bus owners or passengers to implement this hook.
-  // useEffect(() => {
-  //   try {
-  //     getPassengerData().then((data) => {
-  //       console.log("API Response for passenger data:", data);
-  //       const formattedData = data.map((item, index) => ({
-  //         ...item,
-  //         key: index,
-  //       }));
-  //       setPassengerData(formattedData);
-  //     });
-  //   } catch (error) {
-  //     console.log("Error fetching passenger data:", error);
-  //   }
-  // }, [activeTabKey1]);
+  useEffect(() => {
+    try {
+      getBusOwnerData().then((data) => {
+        setBusOwnerData(data);
+      });
+      getPassengerData().then((data) => {
+        console.log(data);
+        setPassengerData(data);
+      });
+    } catch (error) {
+      console.log("Error fetching bus owner data:", error);
+    }
+  }, []);
 
   const tabList = [
     {
@@ -54,20 +37,30 @@ const ManageUsers = () => {
 
   const columnsBusOwners = [
     {
-      title: "Registration ID",
-      dataIndex: "registrationid",
-      key: "registrationid",
+      title: "Email",
+      dataIndex: "email",
+      key: "email",
       render: (text) => <a>{text}</a>,
     },
     {
-      title: "Full Name",
-      dataIndex: "fullname",
-      key: "fullname",
+      title: "Name",
+      dataIndex: "name",
+      key: "name",
     },
     {
-      title: "NIC number",
-      dataIndex: "nicnumber",
-      key: "nicnumber",
+      title: "Mobile number",
+      dataIndex: "mobile_number",
+      key: "mobile_number",
+    },
+    {
+      title: "Date of Birth",
+      dataIndex: "date_of_birth",
+      key: "date_of_birth",
+    },
+    {
+      title: "Address",
+      dataIndex: "address",
+      key: "address",
     },
     {
       title: "Action",
@@ -87,20 +80,30 @@ const ManageUsers = () => {
 
   const columnsPassengers = [
     {
-      title: "Registration ID",
-      dataIndex: "registrationid",
-      key: "registrationid",
+      title: "Email",
+      dataIndex: "email",
+      key: "email",
       render: (text) => <a>{text}</a>,
     },
     {
-      title: "Full Name",
-      dataIndex: "fullname",
-      key: "fullname",
+      title: "Name",
+      dataIndex: "name",
+      key: "name",
     },
     {
-      title: "NIC number",
-      dataIndex: "nicnumber",
-      key: "nicnumber",
+      title: "Mobile number",
+      dataIndex: "mobile_number",
+      key: "mobile_number",
+    },
+    {
+      title: "Date of Birth",
+      dataIndex: "date_of_birth",
+      key: "date_of_birth",
+    },
+    {
+      title: "Address",
+      dataIndex: "address",
+      key: "address",
     },
     {
       title: "Action",
@@ -115,48 +118,6 @@ const ManageUsers = () => {
           </Button>
         </Space>
       ),
-    },
-  ];
-
-  const busOwnerData = [
-    {
-      key: "1",
-      registrationid: "BO123456",
-      fullname: "John Doe",
-      nicnumber: "123456789V",
-    },
-    {
-      key: "2",
-      registrationid: "BO654321",
-      fullname: "Jane Smith",
-      nicnumber: "987654321V",
-    },
-    {
-      key: "3",
-      registrationid: "BO112233",
-      fullname: "Mark Johnson",
-      nicnumber: "112233445V",
-    },
-  ];
-
-  const passengerData = [
-    {
-      key: "1",
-      registrationid: "P123456",
-      fullname: "Alice Brown",
-      nicnumber: "123456789V",
-    },
-    {
-      key: "2",
-      registrationid: "P654321",
-      fullname: "Bob White",
-      nicnumber: "987654321V",
-    },
-    {
-      key: "3",
-      registrationid: "P112233",
-      fullname: "Charlie Green",
-      nicnumber: "112233445V",
     },
   ];
 
