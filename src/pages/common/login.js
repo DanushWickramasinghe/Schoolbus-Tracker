@@ -12,12 +12,10 @@ const LoginPage = () => {
     login(values)
       .then((data) => {
         if (data === 'Invalid credentials') {
-          console.log('Invalid credentials');
           message.error('Invalid credentials');
           setLoading(false);
           return;
         }
-        console.log(data);
         if (data.refreshToken && data.accessToken) {
           message.success('Logged in successfully');
           navigate('/');

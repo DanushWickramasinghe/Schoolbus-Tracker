@@ -29,7 +29,6 @@ const ProtectedRoute = ({ children, roles }) => {
           return <Navigate to='/login' />;
         }
       } catch (error) {
-        console.log('come here');
         console.error('Error:', error);
         return <Navigate to='/login' />;
       }
@@ -39,14 +38,12 @@ const ProtectedRoute = ({ children, roles }) => {
       if (!roles.includes(newDecodedToken.role)) {
         return <Navigate to='/login' />;
       }
-      console.log('newDecodedToken:', newDecodedToken.role);
       return children;
     }
 
     if (!roles.includes(decodedToken.role)) {
       return <Navigate to='/login' />;
     }
-    console.log('decodedToken:', decodedToken.role);
     return children;
   } catch (error) {
     console.error('Error:', error);

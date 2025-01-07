@@ -26,7 +26,6 @@ export const getAccessTokenWithRefreshToken = async () => {
     localStorage.setItem('refreshToken', response.data.refreshToken);
     return response.data;
   } catch (error) {
-    console.log(error);
     return error;
   }
 };
@@ -41,19 +40,28 @@ export const logout = () => {
   }
 };
 
-export const register = async (userData) => {
+export const registerData = async (userData) => {
   try {
     const response = await axios.post(`${Host}/api/auth/register`, userData);
+    localStorage.setItem('email', response.data.email);
     return response.data;
   } catch (error) {
     console.error('Error registering:', error);
-    return error;
+    return error.response.data.message;
   }
 };
 
-export const verifyRegisterOtp = async (otp) => {
+export const verifyRegisterOtp = async (otpPasswordData) => {
+  const compltedData = {
+    email: localStorage.getItem('email'),
+    otp: otpPasswordData.otp,
+    password: otpPasswordData.password,
+  };
   try {
-    const response = await axios.post(`${Host}/api/auth/verify-otp`, { otp });
+    const response = await axios.post(
+      `${Host}/api/auth/verify-otp`,
+      compltedData
+    );
     return response.data;
   } catch (error) {
     console.error('Error verifying OTP:', error);

@@ -1,59 +1,74 @@
-import React, { useState } from "react";
-import { Card, Form, Input, Button } from "antd";
-import { register } from "../../apis/auth.api";
+import React, { useState } from 'react';
+import {
+  Card,
+  Form,
+  Input,
+  Button,
+  DatePicker,
+  message,
+  Flex,
+  Radio,
+} from 'antd';
+import { registerData } from '../../apis/auth.api';
+import { useNavigate } from 'react-router-dom';
+
+const radioOptions = [
+  {
+    label: 'Driver',
+    value: 'DRIVER',
+  },
+  {
+    label: 'Passenger',
+    value: 'PASSENGER',
+  },
+];
 
 const RegisterPage = () => {
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
 
   const onFinish = (values) => {
-    console.log(values);
     setLoading(true);
-    register(values)
+    registerData(values)
       .then((data) => {
-        console.log(data);
+        if (data === 'User already exists') {
+          message.error('User already exists!');
+          setLoading(false);
+          return;
+        }
+        message.success(
+          'Enter the OTP sent to your email to verify your account!'
+        );
         setLoading(false);
+        navigate('/verify-otp');
       })
       .catch((error) => {
-        console.error("Error logging in:", error);
+        console.error('Error logging in:', error);
         setLoading(false);
       });
-    // Add register logic here
-  };
-
-  const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
   };
 
   return (
     <Card
-      title="Register"
-      style={{ width: 600, margin: "auto", marginTop: "200px" }}
+      title='Register'
+      style={{ width: 600, margin: 'auto', marginTop: '200px' }}
     >
       <Form
-        name="register"
+        name='register'
         initialValues={{ remember: true }}
         onFinish={onFinish}
-        onFinishFailed={onFinishFailed}
       >
         <Form.Item
-          label="Username"
-          name="username"
-          rules={[{ required: true, message: "Please input your username!" }]}
-        >
-          <Input />
-        </Form.Item>
-
-        <Form.Item
-          label="Email"
-          name="email"
+          label='Email'
+          name='email'
           rules={[
             {
               required: true,
-              message: "Please input your email!",
+              message: 'Please input your email!',
             },
             {
-              type: "email",
-              message: "The input is not a valid email!",
+              type: 'email',
+              message: 'The input is not a valid email!',
             },
           ]}
         >
@@ -61,6 +76,68 @@ const RegisterPage = () => {
         </Form.Item>
 
         <Form.Item
+          label='Name'
+          name='name'
+          rules={[{ required: true, message: 'Please input your name!' }]}
+        >
+          <Input />
+        </Form.Item>
+
+        <Form.Item
+          label='Mobile Number'
+          name='mobile_number'
+          rules={[
+            {
+              required: true,
+              message: 'Please input your mobile number!',
+            },
+            {
+              pattern: /^[0-9]{10}$/,
+              message: 'Please input a valid mobile number!',
+            },
+          ]}
+        >
+          <Input />
+        </Form.Item>
+
+        <Form.Item
+          label='Date of Birth'
+          name='date_of_birth'
+          rules={[
+            {
+              required: true,
+              message: 'Please input your date of birth!',
+            },
+          ]}
+        >
+          <DatePicker />
+        </Form.Item>
+
+        <Form.Item
+          label='Address'
+          name='address'
+          rules={[{ required: true, message: 'Please input your address!' }]}
+        >
+          <Input />
+        </Form.Item>
+
+        <Form.Item
+          label='Role'
+          name='role'
+          rules={[{ required: true, message: 'Please select your role!' }]}
+        >
+          <Flex vertical gap='middle'>
+            <Radio.Group
+              block
+              options={radioOptions}
+              defaultValue='DRIVER'
+              optionType='button'
+              buttonStyle='solid'
+            />
+          </Flex>
+        </Form.Item>
+
+        {/* <Form.Item
           label="Password"
           name="password"
           rules={[{ required: true, message: "Please input your password!" }]}
@@ -90,10 +167,10 @@ const RegisterPage = () => {
           ]}
         >
           <Input.Password />
-        </Form.Item>
+        </Form.Item> */}
 
         <Form.Item>
-          <Button type="primary" htmlType="submit" loading={loading}>
+          <Button type='primary' htmlType='submit' loading={loading}>
             Register
           </Button>
         </Form.Item>

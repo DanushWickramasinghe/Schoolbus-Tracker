@@ -5,6 +5,7 @@ import LoginPage from './pages/common/login';
 import RegisterPage from './pages/common/register';
 import HomePage from './pages/common/home';
 import Dashboard from './pages/common/dashboard';
+import OtpVerification from './pages/common/otpVerification';
 
 import ProtectedRoute from './utils/protectedRoutes';
 
@@ -15,6 +16,7 @@ function App() {
         <Routes>
           <Route path='/login' element={<LoginPage />} />
           <Route path='/register' element={<RegisterPage />} />
+          <Route path='/verify-otp' element={<OtpVerification />} />
           <Route path='/home' element={<HomePage />} />
           <Route
             path='/'
