@@ -1,10 +1,11 @@
 import axios from "axios";
 import Host from "../configs/server";
 
-export const getOwnedVehicles = async () => {
+export const getRegisteredVehicles = async () => {
   try {
-    const response = await axios.get("/api/bus-owner/owned-buses");
-    return response.data;
+    const response = await axios.get(`${Host}/api/user/registered-vehicles`);
+    console.log(response.data.registeredvehicles);
+    return response.data.registeredvehicles;
   } catch (error) {
     console.error("Error fetching owned buses:", error);
     return error;

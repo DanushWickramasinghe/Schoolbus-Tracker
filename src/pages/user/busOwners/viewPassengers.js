@@ -1,8 +1,8 @@
-/* Bus owners can view passengers registered for each of their vehicles here.*/
-/* Functions related to removing current passengers, accepting new passengers */
-
 import React, { useState, useEffect } from "react";
-import { getOwnedVehicles, getPassengers } from "../../../apis/busOwner.api";
+import {
+  getRegisteredVehicles,
+  getVehiclePassengers,
+} from "../../../apis/busOwner.api";
 import { Space, Table } from "antd";
 
 const ViewPassengers = () => {
@@ -10,8 +10,9 @@ const ViewPassengers = () => {
 
   useEffect(() => {
     try {
-      getOwnedVehicles().then((data) => {
-        setVehicles(data);
+      console.log("Fetching owned vehicles....");
+      getRegisteredVehicles().then((data) => {
+        setVehicles(data); // Set the response as the data source for the table
       });
     } catch (error) {
       console.error("Error fetching owned vehicles:", error);
@@ -20,23 +21,12 @@ const ViewPassengers = () => {
 
   const getPassengers = async (busId) => {
     try {
-      const passengers = await getPassengers(busId);
+      const passengers = await getVehiclePassengers(busId);
       console.log(passengers);
     } catch (error) {
       console.error("Error fetching passengers:", error);
     }
   };
-
-  const items = [
-    {
-      key: "1",
-      label: "Action 1",
-    },
-    {
-      key: "2",
-      label: "Action 2",
-    },
-  ];
 
   const expandDataSource = Array.from({
     length: 3,
@@ -45,18 +35,6 @@ const ViewPassengers = () => {
     date: "2014-12-24 23:12:00",
     name: "This is production name",
     upgradeNum: "Upgraded: 56",
-  }));
-
-  const dataSource = Array.from({
-    length: 3,
-  }).map((_, i) => ({
-    key: i.toString(),
-    name: "Screen",
-    platform: "iOS",
-    version: "10.3.4.5654",
-    upgradeNum: 500,
-    creator: "Jack",
-    createdAt: "2014-12-24 23:12:00",
   }));
 
   const expandColumns = [
@@ -99,29 +77,44 @@ const ViewPassengers = () => {
 
   const columns = [
     {
-      title: "Vehicle Number",
-      dataIndex: "vehicleNumber",
-      key: "vehicleNumber",
-    },
-    {
-      title: "Vehicle Owner",
-      dataIndex: "vehicleOwner",
-      key: "vehicleOwner",
+      title: "Owner Name",
+      dataIndex: "owner_name",
+      key: "owner_name",
     },
     {
       title: "Owner NIC",
-      dataIndex: "ownerNIC",
-      key: "ownerNIC",
+      dataIndex: "owner_NIC_number",
+      key: "owner_NIC_number",
     },
     {
       title: "Vehicle Type",
-      dataIndex: "vehicleType",
-      key: "vehicleType",
+      dataIndex: "vehicle_type",
+      key: "vehicle_type",
     },
     {
       title: "Vehicle Model",
-      dataIndex: "vehicleModel",
-      key: "vehicleModel",
+      dataIndex: "vehicle_model",
+      key: "vehicle_model",
+    },
+    {
+      title: "Vehicle Number",
+      dataIndex: "vehicle_number",
+      key: "vehicle_number",
+    },
+    {
+      title: "Starting Location",
+      dataIndex: "starting_location",
+      key: "starting_location",
+    },
+    {
+      title: "End Location",
+      dataIndex: "end_location",
+      key: "end_location",
+    },
+    {
+      title: "Covered Cities",
+      dataIndex: "covered_cities",
+      key: "covered_cities",
     },
     {
       title: "Action",
@@ -151,7 +144,7 @@ const ViewPassengers = () => {
           expandedRowRender,
           defaultExpandedRowKeys: [],
         }}
-        dataSource={dataSource}
+        dataSource={vehicles} // Set the data source to the state holding fetched vehicles
       />
     </div>
   );
