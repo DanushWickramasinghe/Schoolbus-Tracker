@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import { Card, Form, Input, Button, Checkbox, Alert } from 'antd';
-import { login, verifyRegisterOtp } from '../../apis/auth.api';
+import { Card, Form, Input, Button, Checkbox, message } from 'antd';
+import { login } from '../../apis/auth.api';
+import { useNavigate } from 'react-router-dom';
 
 const LoginPage = () => {
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
 
   const onFinish = (values) => {
@@ -11,13 +13,20 @@ const LoginPage = () => {
       .then((data) => {
         if (data === 'Invalid credentials') {
           console.log('Invalid credentials');
+          message.error('Invalid credentials');
+          setLoading(false);
           return;
         }
         console.log(data);
+        if (data.refreshToken && data.accessToken) {
+          message.success('Logged in successfully');
+          navigate('/');
+        }
         setLoading(false);
       })
       .catch((error) => {
         console.error('Error logging in:', error);
+        message.error('Error logging in');
         setLoading(false);
       });
   };

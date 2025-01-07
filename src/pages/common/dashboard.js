@@ -245,7 +245,7 @@ const DashBoard = () => {
             flexGrow: 1, // Make Menu take up remaining space
             minHeight: 0, // Ensure it can shrink if needed
             // width: collapsed ? 80 : 256,
-            maxWidth: collapsed ? 80 : 256,
+            maxWidth: collapsed ? 70 : 256,
           }}
         />
         <div style={{ flexGrow: 1, padding: 16, overflow: 'auto' }}>
