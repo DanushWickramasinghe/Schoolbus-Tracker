@@ -12,18 +12,7 @@ import {
 import { registerData } from "../../apis/auth.api";
 import { useNavigate } from "react-router-dom";
 
-const radioOptions = [
-  {
-    label: "Driver",
-    value: "DRIVER",
-  },
-  {
-    label: "Passenger",
-    value: "PASSENGER",
-  },
-];
-
-const RegisterPage = ({ title }) => {
+const RegisterPage = ({ title, role }) => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
 
@@ -47,6 +36,39 @@ const RegisterPage = ({ title }) => {
         setLoading(false);
       });
   };
+
+  // Set options and default value based on the role prop
+  const getRoleOptions = (role) => {
+    switch (role) {
+      case "admin":
+        return {
+          options: [{ label: "Admin", value: "ADMIN" }],
+          defaultValue: "",
+        };
+      case "driver":
+        return {
+          options: [{ label: "Driver", value: "DRIVER" }],
+          defaultValue: "DRIVER",
+        };
+      case "passenger":
+        return {
+          options: [{ label: "Passenger", value: "PASSENGER" }],
+          defaultValue: "",
+        };
+      case "general":
+        return {
+          options: [
+            { label: "Driver", value: "DRIVER" },
+            { label: "Passenger", value: "PASSENGER" },
+          ],
+          defaultValue: "",
+        };
+      default:
+        return { options: [], defaultValue: null };
+    }
+  };
+
+  const { options: radioOptions, defaultValue } = getRoleOptions(role);
 
   return (
     <Card>
@@ -129,44 +151,12 @@ const RegisterPage = ({ title }) => {
               <Radio.Group
                 block
                 options={radioOptions}
-                defaultValue="DRIVER"
+                defaultValue={defaultValue}
                 optionType="button"
                 buttonStyle="solid"
               />
             </Flex>
           </Form.Item>
-
-          {/* <Form.Item
-          label="Password"
-          name="password"
-          rules={[{ required: true, message: "Please input your password!" }]}
-        >
-          <Input.Password />
-        </Form.Item>
-
-        <Form.Item
-          label="Confirm Password"
-          name="confirmPassword"
-          dependencies={["password"]}
-          rules={[
-            {
-              required: true,
-              message: "Please confirm your password!",
-            },
-            ({ getFieldValue }) => ({
-              validator(_, value) {
-                if (!value || getFieldValue("password") === value) {
-                  return Promise.resolve();
-                }
-                return Promise.reject(
-                  new Error("The two passwords do not match!")
-                );
-              },
-            }),
-          ]}
-        >
-          <Input.Password />
-        </Form.Item> */}
 
           <Form.Item>
             <Button type="primary" htmlType="submit" block loading={loading}>

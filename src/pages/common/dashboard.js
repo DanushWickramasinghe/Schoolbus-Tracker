@@ -31,9 +31,10 @@ const componentsMap = {
   1: <General />,
   2: <VehicleRegistrationForm />,
   3: <ViewPassengers />,
-  4: <RegisterPage title="Passenger Registration" />,
+  4: <RegisterPage title="Passenger Registration" role="passenger" />,
   5: <ViewPassengers />,
-  8: <RegisterPage title="Driver Registration" />,
+  6: <RegisterPage title="Admin Registration" role="admin" />,
+  8: <RegisterPage title="Driver Registration" role="driver" />,
   10: <ManageUsers />,
 };
 

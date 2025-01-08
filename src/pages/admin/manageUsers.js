@@ -2,11 +2,16 @@
 
 import React, { useState, useEffect } from "react";
 import { Card, Space, Table, Button } from "antd";
-import { getBusOwnerData, getPassengerData } from "../../apis/admin.api";
+import {
+  getBusOwnerData,
+  getPassengerData,
+  getAdminData,
+} from "../../apis/admin.api";
 
 const ManageUsers = () => {
   const [busOwnerData, setBusOwnerData] = useState([]);
   const [passengerData, setPassengerData] = useState([]);
+  const [adminData, setAdminData] = useState([]);
   const [activeTabKey1, setActiveTabKey1] = useState("BusOwners");
 
   // Should register users as bus owners or passengers to implement this hook.
@@ -16,11 +21,13 @@ const ManageUsers = () => {
         setBusOwnerData(data);
       });
       getPassengerData().then((data) => {
-        console.log(data);
         setPassengerData(data);
       });
+      getAdminData().then((data) => {
+        setAdminData(data);
+      });
     } catch (error) {
-      console.log("Error fetching bus owner data:", error);
+      console.log("Error fetching user table data:", error);
     }
   }, []);
 
@@ -33,9 +40,13 @@ const ManageUsers = () => {
       key: "Passengers",
       tab: "Passengers",
     },
+    {
+      key: "Admins",
+      tab: "Admins",
+    },
   ];
 
-  const columnsBusOwners = [
+  const columns = [
     {
       title: "Email",
       dataIndex: "email",
@@ -63,47 +74,9 @@ const ManageUsers = () => {
       key: "address",
     },
     {
-      title: "Action",
-      key: "action",
-      render: (_, record) => (
-        <Space size="middle">
-          <Button type="primary" size="small">
-            Remove user
-          </Button>
-          <Button type="primary" size="small">
-            Edit user
-          </Button>
-        </Space>
-      ),
-    },
-  ];
-
-  const columnsPassengers = [
-    {
-      title: "Email",
-      dataIndex: "email",
-      key: "email",
-      render: (text) => <a>{text}</a>,
-    },
-    {
-      title: "Name",
-      dataIndex: "name",
-      key: "name",
-    },
-    {
-      title: "Mobile number",
-      dataIndex: "mobile_number",
-      key: "mobile_number",
-    },
-    {
-      title: "Date of Birth",
-      dataIndex: "date_of_birth",
-      key: "date_of_birth",
-    },
-    {
-      title: "Address",
-      dataIndex: "address",
-      key: "address",
+      title: "Role",
+      dataIndex: "role",
+      key: "role",
     },
     {
       title: "Action",
@@ -122,10 +95,9 @@ const ManageUsers = () => {
   ];
 
   const contentList = {
-    BusOwners: <Table columns={columnsBusOwners} dataSource={busOwnerData} />,
-    Passengers: (
-      <Table columns={columnsPassengers} dataSource={passengerData} />
-    ),
+    BusOwners: <Table columns={columns} dataSource={busOwnerData} />,
+    Passengers: <Table columns={columns} dataSource={passengerData} />,
+    Admins: <Table columns={columns} dataSource={adminData} />,
   };
 
   const onTab1Change = (key) => {

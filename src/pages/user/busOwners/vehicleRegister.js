@@ -11,51 +11,51 @@ const { Option } = Select;
 const VehicleRegistrationForm = () => {
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
-  const [users, setUsers] = useState([]);
+  // const [users, setUsers] = useState([]);
 
-  useEffect(() => {
-    try {
-      getBusOwnerData().then((data) => {
-        setUsers(data);
-      });
-    } catch (error) {
-      console.error("Error fetching users:", error);
-    }
-  }, []);
+  // useEffect(() => {
+  //   try {
+  //     getBusOwnerData().then((data) => {
+  //       setUsers(data);
+  //     });
+  //   } catch (error) {
+  //     console.error("Error fetching users:", error);
+  //   }
+  // }, []);
 
-  const handleMenuClick = (e) => {
-    message.info("Click on menu item.");
-    console.log("click", e);
-  };
-  const items = [
-    {
-      label: "1st menu item",
-      key: "1",
-      icon: <UserOutlined />,
-    },
-    {
-      label: "2nd menu item",
-      key: "2",
-      icon: <UserOutlined />,
-    },
-    {
-      label: "3rd menu item",
-      key: "3",
-      icon: <UserOutlined />,
-      danger: true,
-    },
-    {
-      label: "4rd menu item",
-      key: "4",
-      icon: <UserOutlined />,
-      danger: true,
-      disabled: true,
-    },
-  ];
-  const menuProps = {
-    items,
-    onClick: handleMenuClick,
-  };
+  // const handleMenuClick = (e) => {
+  //   message.info("Click on menu item.");
+  //   console.log("click", e);
+  // };
+  // const items = [
+  //   {
+  //     label: "1st menu item",
+  //     key: "1",
+  //     icon: <UserOutlined />,
+  //   },
+  //   {
+  //     label: "2nd menu item",
+  //     key: "2",
+  //     icon: <UserOutlined />,
+  //   },
+  //   {
+  //     label: "3rd menu item",
+  //     key: "3",
+  //     icon: <UserOutlined />,
+  //     danger: true,
+  //   },
+  //   {
+  //     label: "4rd menu item",
+  //     key: "4",
+  //     icon: <UserOutlined />,
+  //     danger: true,
+  //     disabled: true,
+  //   },
+  // ];
+  // const menuProps = {
+  //   items,
+  //   onClick: handleMenuClick,
+  // };
 
   const onFinish = (values) => {
     console.log(values);
@@ -93,13 +93,14 @@ const VehicleRegistrationForm = () => {
           name="owner_name"
           rules={[{ required: true, message: "Please enter the owner's name" }]}
         >
-          <Dropdown.Button
+          {/* <Dropdown.Button
             menu={menuProps}
             placement="bottom"
             icon={<UserOutlined />}
           >
             Choose name of the vehicle owner
-          </Dropdown.Button>
+          </Dropdown.Button> */}
+          <Input placeholder="Enter Owner Name" />
         </Form.Item>
 
         <Form.Item

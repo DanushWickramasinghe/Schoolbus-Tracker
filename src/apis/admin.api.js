@@ -21,6 +21,16 @@ export const getPassengerData = async () => {
   }
 };
 
+export const getAdminData = async () => {
+  try {
+    const response = await axios.get(`${Host}/api/user/admin-data`);
+    return response.data.adminDetails;
+  } catch (error) {
+    console.error("Error fetching admin data:", error);
+    return error;
+  }
+};
+
 export const getDashboardData = async () => {
   try {
     const response = await axios.get("/api/dashboard-data");
