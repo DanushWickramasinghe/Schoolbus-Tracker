@@ -33,8 +33,8 @@ export const getAdminData = async () => {
 
 export const getDashboardData = async () => {
   try {
-    const response = await axios.get("/api/dashboard-data");
-    return response.data;
+    const response = await axios.get(`${Host}/api/user/dashboard-data`);
+    return response.data.dashboardData;
   } catch (error) {
     console.error("Error fetching dashboard data:", error);
     return error;
