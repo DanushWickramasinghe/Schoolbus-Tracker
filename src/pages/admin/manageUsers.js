@@ -1,7 +1,7 @@
 /* Admin access to manage any user, who uses the application */
 
 import React, { useState, useEffect } from "react";
-import { Card, Space, Table, Button } from "antd";
+import { Card, Space, Table, Button, Alert } from "antd";
 import {
   getBusOwnerData,
   getPassengerData,
@@ -102,6 +102,10 @@ const ManageUsers = () => {
 
   const onTab1Change = (key) => {
     setActiveTabKey1(key);
+  };
+
+  const removeUser = (record) => {
+    console.log("Remove user: ", record);
   };
 
   return (
