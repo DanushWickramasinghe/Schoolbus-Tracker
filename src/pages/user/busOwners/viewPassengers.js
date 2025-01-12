@@ -4,9 +4,11 @@ import {
   getVehiclePassengers,
 } from "../../../apis/busOwner.api";
 import { Space, Table } from "antd";
+import { useNavigate } from "react-router-dom";
 
 const ViewPassengers = () => {
   const [vehicles, setVehicles] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     try {
@@ -27,6 +29,11 @@ const ViewPassengers = () => {
     } catch (error) {
       console.error("Error fetching passengers:", error);
     }
+  };
+
+  const handleEdit = (vehicle) => {
+    console.log("Selected Vehicle Details:", vehicle); // Log to verify the selected data
+    navigate("/registervehicle", { state: { vehicle } }); // Pass data to the next page
   };
 
   // Should be replaced with actual data from the API
@@ -121,9 +128,9 @@ const ViewPassengers = () => {
     {
       title: "Action",
       key: "operation",
-      render: () => (
+      render: (_, vehicle) => (
         <Space size="middle">
-          <a>Edit details</a>
+          <a onClick={() => handleEdit(vehicle)}>Edit details</a>
           <a>Remove vehicle</a>
         </Space>
       ),

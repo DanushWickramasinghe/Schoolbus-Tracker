@@ -8,7 +8,7 @@ import { getBusOwnerData } from "../../../apis/admin.api";
 
 const { Option } = Select;
 
-const VehicleRegistrationForm = () => {
+const VehicleRegistrationForm = ({ title }) => {
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
   // const [users, setUsers] = useState([]);
@@ -80,7 +80,7 @@ const VehicleRegistrationForm = () => {
 
   return (
     <div style={{ maxWidth: 600, margin: "0 auto", padding: "50px" }}>
-      <h2 style={{ textAlign: "center" }}>Vehicle Registration</h2>
+      <h2 style={{ textAlign: "center" }}>{title}</h2>
       <Form
         form={form}
         name="vehicle-registration"

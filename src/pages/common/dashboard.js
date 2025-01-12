@@ -29,7 +29,7 @@ const RegisterPage = React.lazy(() => import("../common/register"));
 
 const componentsMap = {
   1: <General />,
-  2: <VehicleRegistrationForm />,
+  2: <VehicleRegistrationForm title="Vehicle Registration" />,
   3: <ViewPassengers />,
   4: <RegisterPage title="Passenger Registration" role="passenger" />,
   5: <ViewPassengers />,

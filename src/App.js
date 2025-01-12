@@ -6,6 +6,7 @@ import RegisterPage from "./pages/common/register";
 import HomePage from "./pages/common/home";
 import Dashboard from "./pages/common/dashboard";
 import OtpVerification from "./pages/common/otpVerification";
+import VehicleRegistrationForm from "./pages/user/busOwners/vehicleRegister";
 
 import ProtectedRoute from "./utils/protectedRoutes";
 
@@ -28,6 +29,10 @@ function App() {
                 <Dashboard />
               </ProtectedRoute>
             }
+          />
+          <Route
+            path="/registervehicle"
+            element={<VehicleRegistrationForm title="Edit Vehicle details" />}
           />
         </Routes>
       </BrowserRouter>
