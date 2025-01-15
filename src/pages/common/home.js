@@ -4,6 +4,7 @@ import "antd/dist/reset.css";
 
 const { Header, Content, Footer } = Layout;
 
+// Home page for the users.
 const HomePage = () => {
   return (
     <Layout className="layout">

@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
-import { Card, Form, Input, Button, message } from 'antd';
-import { useNavigate } from 'react-router-dom';
-import { verifyRegisterOtp } from '../../apis/auth.api';
+import React, { useState } from "react";
+import { Card, Form, Input, Button, message } from "antd";
+import { useNavigate } from "react-router-dom";
+import { verifyRegisterOtp } from "../../apis/auth.api";
 
+// Verifies the OTP sent to the email.
 const OTPVerification = () => {
   const navigate = useNavigate();
   const [otp, setOtp] = useState(null);
@@ -18,33 +19,33 @@ const OTPVerification = () => {
     setLoading(true);
     verifyRegisterOtp({ otp, password: values.password })
       .then((data) => {
-        if (data.message === 'User registered successfully') {
-          message.success('Password set successfully!');
+        if (data.message === "User registered successfully") {
+          message.success("Password set successfully!");
           setLoading(false);
-          navigate('/login');
+          navigate("/login");
           return;
         }
         if (data.response.data.message) {
-          if (data.response.data.message === 'Invalid OTP') {
-            message.error('OTP is incorrect!');
+          if (data.response.data.message === "Invalid OTP") {
+            message.error("OTP is incorrect!");
             setOtp(null);
             setLoading(false);
             otpForm.resetFields();
             passwordForm.resetFields();
             return;
           }
-          if (data.response.data.message === 'OTP expired') {
-            message.error('OTP is expired!');
-            navigate('/register');
+          if (data.response.data.message === "OTP expired") {
+            message.error("OTP is expired!");
+            navigate("/register");
             setLoading(false);
             return;
           }
         }
-        message.error('Error setting password!');
+        message.error("Error setting password!");
         setLoading(false);
       })
       .catch((error) => {
-        console.error('Error setting password:', error);
+        console.error("Error setting password:", error);
         setLoading(false);
       });
   };
@@ -53,29 +54,29 @@ const OTPVerification = () => {
     <div>
       {otp === null ? (
         <Card
-          title='Verify OTP'
-          style={{ width: 600, margin: 'auto', marginTop: '200px' }}
+          title="Verify OTP"
+          style={{ width: 600, margin: "auto", marginTop: "200px" }}
         >
           <Form
             form={otpForm}
-            name='verify-otp'
+            name="verify-otp"
             initialValues={{ remember: true }}
             onFinish={onFinishOTP}
           >
             <Form.Item
-              label='OTP'
-              name='otp'
+              label="OTP"
+              name="otp"
               rules={[
                 {
                   required: true,
-                  message: 'Please input your OTP!',
+                  message: "Please input your OTP!",
                 },
               ]}
             >
               <Input />
             </Form.Item>
             <Form.Item>
-              <Button type='primary' htmlType='submit' loading={loading}>
+              <Button type="primary" htmlType="submit" loading={loading}>
                 Verify OTP
               </Button>
             </Form.Item>
@@ -83,42 +84,42 @@ const OTPVerification = () => {
         </Card>
       ) : (
         <Card
-          title='Set New Password'
-          style={{ width: 600, margin: 'auto', marginTop: '200px' }}
+          title="Set New Password"
+          style={{ width: 600, margin: "auto", marginTop: "200px" }}
         >
           <Form
             form={passwordForm}
-            name='set-password'
+            name="set-password"
             initialValues={{ remember: true }}
             onFinish={onFinishPassword}
           >
             <Form.Item
-              label='New Password'
-              name='password'
+              label="New Password"
+              name="password"
               rules={[
                 {
                   required: true,
-                  message: 'Please input your new password!',
+                  message: "Please input your new password!",
                 },
               ]}
             >
               <Input.Password />
             </Form.Item>
             <Form.Item
-              label='Confirm Password'
-              name='confirmPassword'
+              label="Confirm Password"
+              name="confirmPassword"
               rules={[
                 {
                   required: true,
-                  message: 'Please confirm your new password!',
+                  message: "Please confirm your new password!",
                 },
                 ({ getFieldValue }) => ({
                   validator(_, value) {
-                    if (!value || getFieldValue('password') === value) {
+                    if (!value || getFieldValue("password") === value) {
                       return Promise.resolve();
                     }
                     return Promise.reject(
-                      new Error('The two passwords do not match!')
+                      new Error("The two passwords do not match!")
                     );
                   },
                 }),
@@ -127,7 +128,7 @@ const OTPVerification = () => {
               <Input.Password />
             </Form.Item>
             <Form.Item>
-              <Button type='primary' htmlType='submit' loading={loading}>
+              <Button type="primary" htmlType="submit" loading={loading}>
                 Set Password
               </Button>
             </Form.Item>

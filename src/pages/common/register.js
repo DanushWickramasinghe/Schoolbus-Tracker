@@ -12,6 +12,7 @@ import {
 import { registerData } from "../../apis/auth.api";
 import { useNavigate } from "react-router-dom";
 
+// Common component for registering a user.
 const RegisterPage = ({ title, role }) => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
