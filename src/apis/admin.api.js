@@ -1,6 +1,7 @@
 import axios from "axios";
 import Host from "../configs/server";
 
+// Contains API calls realted to Admin functionalities.
 export const getBusOwnerData = async () => {
   try {
     const response = await axios.get(`${Host}/api/user/bus-owner-data`);

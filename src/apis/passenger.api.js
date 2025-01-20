@@ -1,6 +1,7 @@
 import axios from "axios";
 import Host from "../configs/server";
 
+// This API is defined to fetch the details of the vehicle that the passenger has registered.
 export const viewVehicleDetails = async () => {
   try {
     const response = await axios.get(
